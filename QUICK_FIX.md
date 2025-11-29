@@ -27,7 +27,6 @@ npm run dev
 Đảm bảo file `.env` có nội dung chính xác (không có khoảng trắng thừa):
 
 ```env
-VITE_GEMINI_API_KEY=AIzaSyCN0zJx7whRiSgAdKXFFYxyLdgRlQWpREM
 ```
 
 **LƯU Ý QUAN TRỌNG:**

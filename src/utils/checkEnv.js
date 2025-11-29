@@ -2,8 +2,9 @@
  * Check if environment variables are properly configured
  */
 export const checkEnvironment = () => {
+  console.log('import.meta.env', import.meta.env)
   // Get API key from import.meta.env (Vite way)
-  const apiKey ='AIzaSyCN0zJx7whRiSgAdKXFFYxyLdgRlQWpREM'
+  const apiKey = import.meta.env.VITE_GEMINI_API_KEY  
   
   // Get all env keys for debugging
   const allEnv = import.meta.env || {}

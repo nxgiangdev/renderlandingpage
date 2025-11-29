@@ -11,7 +11,6 @@ npm install
 Tạo file `.env` trong thư mục root với nội dung:
 
 ```env
-VITE_GEMINI_API_KEY=AIzaSyCN0zJx7whRiSgAdKXFFYxyLdgRlQWpREM
 ```
 
 **Lưu ý**: File `.env` đã được thêm vào `.gitignore` để bảo mật.

@@ -11,7 +11,6 @@ File `.env` chưa được tạo hoặc dev server chưa được restart sau kh
 Đảm bảo file `.env` tồn tại trong thư mục root của project với nội dung:
 
 ```env
-VITE_GEMINI_API_KEY=AIzaSyCN0zJx7whRiSgAdKXFFYxyLdgRlQWpREM
 ```
 
 #### Bước 2: Restart Dev Server

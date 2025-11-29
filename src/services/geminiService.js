@@ -9,11 +9,11 @@ import { suggestColors } from '../utils/suggestColors'
  * @returns {Promise<{code: string, metadata: object}>}
  */
 export const generateLandingPage = async (prompt) => {
-    // API Key - hardcode (chỉ cho dev)
-    const apiKey = 'AIzaSyCN0zJx7whRiSgAdKXFFYxyLdgRlQWpREM'
+    // Get API Key from environment variable
+    const apiKey = ''
 
     if (!apiKey || apiKey.trim() === '') {
-        throw new Error('Gemini API key không được tìm thấy.')
+        throw new Error('Gemini API key không được tìm thấy. Vui lòng kiểm tra file .env và đảm bảo có VITE_GEMINI_API_KEY=your_api_key_here')
     }
 
     // Detect industry and style
@@ -95,10 +95,7 @@ export const generateLandingPage = async (prompt) => {
 
         // Use available models if found, otherwise use fallback
         const fallbackModels = [
-            'gemini-pro',
-            'gemini-1.0-pro',
-            'gemini-1.5-flash',
-            'gemini-1.5-pro',
+            'gemini-3-pro'
         ]
         
         const modelsToTry = availableModels.length > 0 

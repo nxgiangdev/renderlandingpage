@@ -15,7 +15,7 @@ app.use(cors())
 app.use(express.json())
 
 // API Key - lấy từ env hoặc hardcode (chỉ cho dev)
-const API_KEY = process.env.GEMINI_API_KEY || 'AIzaSyCN0zJx7whRiSgAdKXFFYxyLdgRlQWpREM'
+const API_KEY = process.env.GEMINI_API_KEY || 'AIzaSyA_IrX4lEdyQGDN-45nKITU6ucJub3CAr4'
 
 console.log('🚀 Server started on port', PORT)
 console.log('🔑 API Key loaded:', API_KEY ? `${API_KEY.substring(0, 10)}...` : 'NOT FOUND')

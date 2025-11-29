@@ -77,8 +77,11 @@ export const detectIndustry = (prompt) => {
 export const getIndustrySuggestions = (industryKey) => {
   const industry = INDUSTRY_DICTIONARY[industryKey] || INDUSTRY_DICTIONARY.general
   
+  // Always include header as first section
+  const sections = ['header', ...industry.defaultSections]
+  
   return {
-    sections: industry.defaultSections,
+    sections: sections,
     colors: industry.suggestedColors,
     style: industry.suggestedStyle
   }

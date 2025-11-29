@@ -29,20 +29,20 @@ const ExportModal = ({ isOpen, onClose, code }) => {
   const formats = [
     {
       value: 'html',
-      label: 'HTML Standalone',
-      description: 'Simple HTML/CSS/JS files, ready to use',
+      label: 'HTML Độc lập',
+      description: 'File HTML/CSS/JS đơn giản, sẵn sàng sử dụng',
       icon: '📄'
     },
     {
       value: 'react',
-      label: 'React Project',
-      description: 'Full React project with Create React App setup',
+      label: 'Dự án React',
+      description: 'Dự án React đầy đủ với Create React App',
       icon: '⚛️'
     },
     {
       value: 'nextjs',
-      label: 'Next.js Project',
-      description: 'Next.js project with App Router',
+      label: 'Dự án Next.js',
+      description: 'Dự án Next.js với App Router',
       icon: '▲'
     }
   ]
@@ -53,7 +53,7 @@ const ExportModal = ({ isOpen, onClose, code }) => {
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b">
           <h2 className="text-xl font-semibold text-gray-900">
-            Export Project
+            Xuất dự án
           </h2>
           <button
             onClick={onClose}
@@ -71,7 +71,7 @@ const ExportModal = ({ isOpen, onClose, code }) => {
           {/* Format Selection */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-3">
-              Export Format
+              Định dạng xuất
             </label>
             <div className="grid grid-cols-1 gap-3">
               {formats.map(fmt => (
@@ -105,7 +105,7 @@ const ExportModal = ({ isOpen, onClose, code }) => {
           {/* Filename */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Filename
+              Tên file
             </label>
             <input
               type="text"
@@ -116,14 +116,14 @@ const ExportModal = ({ isOpen, onClose, code }) => {
               disabled={isExporting}
             />
             <p className="text-xs text-gray-500 mt-1">
-              The exported ZIP file will be named: {filename}-{format}.zip
+              File ZIP xuất ra sẽ có tên: {filename}-{format}.zip
             </p>
           </div>
 
           {/* Error Message */}
           {error && (
             <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
-              <p className="font-medium">Error:</p>
+              <p className="font-medium">Lỗi:</p>
               <p>{error}</p>
             </div>
           )}
@@ -131,9 +131,9 @@ const ExportModal = ({ isOpen, onClose, code }) => {
           {/* Info */}
           <div className="bg-blue-50 border border-blue-200 text-blue-700 px-4 py-3 rounded-lg">
             <p className="text-sm">
-              <strong>Note:</strong> The exported project includes all necessary files and setup instructions.
-              {format === 'react' && ' You\'ll need to run `npm install` after extracting.'}
-              {format === 'nextjs' && ' You\'ll need to run `npm install` after extracting.'}
+              <strong>Lưu ý:</strong> Dự án xuất ra bao gồm tất cả các file cần thiết và hướng dẫn cài đặt.
+              {format === 'react' && ' Bạn cần chạy `npm install` sau khi giải nén.'}
+              {format === 'nextjs' && ' Bạn cần chạy `npm install` sau khi giải nén.'}
             </p>
           </div>
         </div>
@@ -145,7 +145,7 @@ const ExportModal = ({ isOpen, onClose, code }) => {
             className="px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
             disabled={isExporting}
           >
-            Cancel
+            Hủy
           </button>
           <button
             onClick={handleExport}
@@ -158,14 +158,14 @@ const ExportModal = ({ isOpen, onClose, code }) => {
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                 </svg>
-                <span>Exporting...</span>
+                <span>Đang xuất...</span>
               </>
             ) : (
               <>
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
-                <span>Export</span>
+                <span>Xuất file</span>
               </>
             )}
           </button>

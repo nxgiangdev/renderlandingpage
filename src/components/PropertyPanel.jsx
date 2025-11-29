@@ -59,10 +59,10 @@ const PropertyPanel = ({ selectedBlock, onUpdateBlock }) => {
     return (
       <div className="bg-white rounded-lg shadow-sm border p-4 h-full">
         <h2 className="text-lg font-semibold text-gray-900 mb-4">
-          Properties
+          Thuộc tính
         </h2>
         <div className="text-center py-8 text-gray-400">
-          <p>Chọn một block để chỉnh sửa</p>
+          <p>Chọn một khối để chỉnh sửa</p>
         </div>
       </div>
     )
@@ -72,7 +72,7 @@ const PropertyPanel = ({ selectedBlock, onUpdateBlock }) => {
     <div className="bg-white rounded-lg shadow-sm border p-4 h-full overflow-y-auto">
       <div className="mb-4">
         <h2 className="text-lg font-semibold text-gray-900">
-          Properties
+          Thuộc tính
         </h2>
         <p className="text-sm text-gray-500 mt-1">
           {selectedBlock.name}
@@ -83,20 +83,20 @@ const PropertyPanel = ({ selectedBlock, onUpdateBlock }) => {
         {/* Colors Section */}
         <div>
           <h3 className="text-sm font-medium text-gray-700 mb-3 border-b pb-2">
-            Colors
+            Màu sắc
           </h3>
           <ColorPicker
-            label="Background Color"
+            label="Màu nền"
             color={colors.backgroundColor}
             onChange={(color) => handleColorChange('backgroundColor', color)}
           />
           <ColorPicker
-            label="Text Color"
+            label="Màu chữ"
             color={colors.textColor}
             onChange={(color) => handleColorChange('textColor', color)}
           />
           <ColorPicker
-            label="Border Color"
+            label="Màu viền"
             color={colors.borderColor}
             onChange={(color) => handleColorChange('borderColor', color)}
           />
@@ -105,7 +105,7 @@ const PropertyPanel = ({ selectedBlock, onUpdateBlock }) => {
         {/* Typography Section */}
         <div>
           <h3 className="text-sm font-medium text-gray-700 mb-3 border-b pb-2">
-            Typography
+            Kiểu chữ
           </h3>
           <TypographyControls
             styles={typography}
@@ -116,12 +116,12 @@ const PropertyPanel = ({ selectedBlock, onUpdateBlock }) => {
         {/* Spacing Section */}
         <div>
           <h3 className="text-sm font-medium text-gray-700 mb-3 border-b pb-2">
-            Spacing
+            Khoảng cách
           </h3>
           <div className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Padding: {spacing.padding}px
+                Đệm trong: {spacing.padding}px
               </label>
               <input
                 type="range"
@@ -134,7 +134,7 @@ const PropertyPanel = ({ selectedBlock, onUpdateBlock }) => {
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Margin: {spacing.margin}px
+                Khoảng ngoài: {spacing.margin}px
               </label>
               <input
                 type="range"
@@ -147,7 +147,7 @@ const PropertyPanel = ({ selectedBlock, onUpdateBlock }) => {
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Gap: {spacing.gap}px
+                Khoảng cách: {spacing.gap}px
               </label>
               <input
                 type="range"

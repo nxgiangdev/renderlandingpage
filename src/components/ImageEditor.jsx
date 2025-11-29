@@ -81,20 +81,8 @@ const ImageEditor = ({ element, onSave, onCancel }) => {
   if (!element) return null
 
   return (
-    <div 
-      className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50" 
-      onClick={onCancel}
-    >
-      <div 
-        className="bg-white rounded-lg shadow-xl p-6 max-w-md w-full mx-4"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <form onSubmit={handleSubmit}>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Thay đổi ảnh
-          </label>
-          
-          {/* Current image preview */}
+    <form onSubmit={handleSubmit} className="w-full">
+      {/* Current image preview */}
           {currentSrc && (
             <div className="mb-4">
               <p className="text-xs text-gray-500 mb-2">Ảnh hiện tại:</p>
@@ -171,8 +159,6 @@ const ImageEditor = ({ element, onSave, onCancel }) => {
             </button>
           </div>
         </form>
-      </div>
-    </div>
   )
 }
 

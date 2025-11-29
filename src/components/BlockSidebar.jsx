@@ -22,14 +22,14 @@ const BlockSidebar = ({ blocks, selectedBlockId, onSelectBlock, onReorder, onDel
     <div className="bg-white rounded-lg shadow-sm border p-4 h-full">
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-lg font-semibold text-gray-900">
-          Blocks ({blocks.length})
+          Khối ({blocks.length})
         </h2>
         <button
           className="px-3 py-1 text-sm bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-colors"
-          title="Add new block (coming soon)"
+          title="Thêm khối mới (sắp có)"
           disabled
         >
-          + Add
+          + Thêm
         </button>
       </div>
 

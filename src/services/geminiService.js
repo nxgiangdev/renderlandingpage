@@ -38,20 +38,35 @@ export const generateLandingPage = async (prompt) => {
     - Create a ${styleDetection.style}, mobile-optimized responsive design
     - Use mobile-friendly touch targets (minimum 44x44px for buttons)
     - Use larger fonts for mobile readability (minimum 16px base font size)
-    - Include the following sections: ${industrySuggestions.sections.join(', ')}
+    
+    MANDATORY SECTIONS (MUST INCLUDE):
+    - HEADER/NAVIGATION: Always include a header with navigation menu at the top of the page. Include logo, menu items (Home, About, Services, Contact, etc.), and mobile hamburger menu. Use <header> or <nav> semantic HTML.
+    - Include the following additional sections: ${industrySuggestions.sections.join(', ')}
+    
     - Use color scheme: ${colorSuggestion.colors.join(', ')}
     - Use clean, professional code optimized for mobile performance
     - Ensure excellent mobile UX/UI practices (swipe-friendly, thumb-friendly navigation)
     - Make it visually appealing with proper spacing, typography, and colors optimized for small screens
     - Tailor the content and design specifically for ${industryDetection.metadata.name} industry
     - Include placeholder text and content that matches the ${industryDetection.metadata.name} theme
-    - Use placeholder images: Use placeholder.com service (https://via.placeholder.com/400x300) or SVG icons, DO NOT use private image URLs or external image links that require authentication
-    - For images, use: https://via.placeholder.com/WIDTHxHEIGHT/COLOR/TEXT or data:image/svg+xml for SVG placeholders
-    - Example: <img src="https://via.placeholder.com/400x300/4F46E5/FFFFFF?text=Image" alt="Placeholder">
+    - Use placeholder images: Use placehold.co service (https://placehold.co/600x400/png) or SVG icons, DO NOT use private image URLs or external image links that require authentication
+    - For images, use: https://placehold.co/WIDTHxHEIGHT/FORMAT (FORMAT: png, jpg, webp) or https://placehold.co/WIDTHxHEIGHT/COLOR/TEXT/FORMAT
+    - Examples: 
+      * <img src="https://placehold.co/400x300/png" alt="Placeholder">
+      * <img src="https://placehold.co/600x400/jpg" alt="Image">
+      * <img src="https://placehold.co/800x600/4F46E5/FFFFFF/png" alt="Hero Image">
+    - Always use placehold.co for all placeholder images in the landing page
     - Stack elements vertically on mobile, use single-column layouts
     - Ensure all interactive elements are easily tappable on mobile devices
 
+    STRUCTURE REQUIREMENTS:
+    - The page MUST start with a header/navigation section at the very top
+    - Header should include: logo, navigation links, and mobile menu toggle
+    - After header, include the recommended sections: ${industrySuggestions.sections.join(', ')}
+    - End with a footer section
+    
     Generate ONLY the HTML code, starting with <!DOCTYPE html> and ending with </html>.
+    The structure should be: <header> → <main> (with sections) → <footer>
     Do not include any explanations, markdown, or code blocks. Just the raw HTML.
 
     User's request: ${prompt}`

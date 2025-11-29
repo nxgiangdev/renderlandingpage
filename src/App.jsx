@@ -33,6 +33,7 @@ function App() {
   const [isExportModalOpen, setIsExportModalOpen] = useState(false)
   const [isFullscreen, setIsFullscreen] = useState(false)
   const [device, setDevice] = useState('mobile') // Default to mobile
+  const [isEditing, setIsEditing] = useState(false) // Track if user is editing
 
   // Block editor hook
   const {
@@ -103,18 +104,18 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <header className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 py-4">
-          <h1 className="text-2xl font-bold text-gray-900">
+      <header className="bg-white shadow-sm border-b sticky top-0 z-40">
+        <div className="max-w-[1920px] mx-auto px-3 sm:px-4 py-3 sm:py-4">
+          <h1 className="text-lg sm:text-2xl font-bold text-gray-900">
             🚀 AI Landing Page Generator
           </h1>
-          <p className="text-sm text-gray-600 mt-1">
+          <p className="text-xs sm:text-sm text-gray-600 mt-1">
             Tạo landing page tự động bằng AI - Chỉ cần mô tả ý tưởng của bạn
           </p>
         </div>
       </header>
 
-      <main className=" mx-auto px-4 py-8">
+      <main className="max-w-[1920px] mx-auto px-4 py-4 sm:py-8">
         {/* Prompt Input Section - Only show when no code generated */}
         {!generatedCode && (
           <div className="max-w-3xl mx-auto">
@@ -153,7 +154,7 @@ function App() {
 
         {/* Main Editor Layout */}
         {generatedCode && (
-          <div className={`grid grid-cols-1 lg:grid-cols-12 gap-6 ${isFullscreen ? 'fixed inset-0 z-50 bg-white p-4' : ''}`}>
+          <div className={`grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-6 ${isFullscreen ? 'fixed inset-0 z-50 bg-white p-2 sm:p-4 overflow-hidden' : ''}`}>
             {/* Left: Blocks Sidebar */}
             {showBlocks && !isFullscreen && (
               <div className="lg:col-span-2">
@@ -168,13 +169,21 @@ function App() {
             )}
 
             {/* Center: Preview */}
-            <div className={`space-y-4 ${isFullscreen ? 'lg:col-span-12' : showBlocks ? 'lg:col-span-7' : 'lg:col-span-9'}`}>
+            <div className={`space-y-4 transition-all duration-300 ${
+              isFullscreen 
+                ? 'lg:col-span-12 overflow-auto' 
+                : isEditing 
+                  ? 'lg:col-span-5' // Thu nhỏ khi đang edit
+                  : showBlocks 
+                    ? 'lg:col-span-7' 
+                    : 'lg:col-span-9'
+            }`}>
               {/* Action Bar */}
-              <div className={`bg-white rounded-lg shadow-sm border p-4 ${isFullscreen ? 'mb-4' : ''}`}>
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-4 flex-wrap">
-                    <h2 className="text-lg font-semibold text-gray-900">
-                      Preview
+              <div className={`bg-white rounded-lg shadow-sm border p-3 sm:p-4 ${isFullscreen ? 'mb-2 sm:mb-4' : ''}`}>
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 mb-4">
+                  <div className="flex items-center gap-2 sm:gap-4 flex-wrap">
+                    <h2 className="text-base sm:text-lg font-semibold text-gray-900">
+                      Xem trước
                     </h2>
                     {metadata && (
                       <div className="flex items-center gap-2 flex-wrap">
@@ -192,59 +201,62 @@ function App() {
                       </div>
                     )}
                   </div>
-                  <div className="flex items-center gap-2">
-                    <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+                    <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
                       <DevicePreview 
                         currentDevice={device}
                         onDeviceChange={setDevice}
                       />
                       <button
                         onClick={() => setIsFullscreen(!isFullscreen)}
-                        className="px-3 py-1 text-sm bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors flex items-center gap-2"
-                        title={isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'}
+                        className="px-2 sm:px-3 py-1 text-xs sm:text-sm bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors flex items-center gap-1 sm:gap-2"
+                        title={isFullscreen ? 'Thoát toàn màn hình' : 'Toàn màn hình'}
                       >
                         {isFullscreen ? (
                           <>
-                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                             </svg>
-                            Exit
+                            <span className="hidden sm:inline">Thoát</span>
                           </>
                         ) : (
                           <>
-                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
                             </svg>
-                            Fullscreen
+                            <span className="hidden sm:inline">Toàn màn hình</span>
                           </>
                         )}
                       </button>
                       {!isFullscreen && (
                         <button
                           onClick={() => setShowBlocks(!showBlocks)}
-                          className="px-3 py-1 text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors"
+                          className="px-2 sm:px-3 py-1 text-xs sm:text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors"
                         >
-                          {showBlocks ? 'Hide' : 'Show'} Blocks
+                          <span className="hidden sm:inline">{showBlocks ? 'Ẩn' : 'Hiện'} Khối</span>
+                          <span className="sm:hidden">Khối</span>
                         </button>
                       )}
                       <button
                         onClick={() => setIsCodeEditorOpen(true)}
-                        className="px-3 py-1 text-sm bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-colors flex items-center gap-2"
+                        className="px-2 sm:px-3 py-1 text-xs sm:text-sm bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-colors flex items-center gap-1 sm:gap-2"
+                        title="Chỉnh sửa mã"
                       >
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                         </svg>
-                        Edit Code
+                        <span className="hidden sm:inline">Chỉnh sửa mã</span>
                       </button>
                       <CopyCodeButton code={previewCode} />
                       <button
                         onClick={() => setIsExportModalOpen(true)}
-                        className="px-3 py-1 text-sm bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors flex items-center gap-2"
+                        className="px-2 sm:px-3 py-1 text-xs sm:text-sm bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors flex items-center gap-1 sm:gap-2"
+                        title="Xuất file"
                       >
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                         </svg>
-                        Export
+                        <span className="hidden sm:inline">Xuất file</span>
                       </button>
                       <ActionButtons
                         onRegenerate={handleRegenerate}
@@ -264,11 +276,11 @@ function App() {
 
                 {/* Style & Color Controls */}
                 {metadata && (
-                  <div className="mb-4 p-4 bg-gray-50 rounded-lg border">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="mb-4 p-3 sm:p-4 bg-gray-50 rounded-lg border">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Style
+                          Phong cách
                         </label>
                         <StyleSelector
                           currentStyle={selectedStyle || metadata.style}
@@ -280,7 +292,7 @@ function App() {
                       </div>
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Color Palette
+                          Bảng màu
                         </label>
                         <ColorPalettePicker
                           currentPalette={selectedColorPalette || metadata.colorScheme}
@@ -302,6 +314,7 @@ function App() {
                     blocks={blocks}
                     onSelectBlock={selectBlock}
                     device={device}
+                    onEditingChange={setIsEditing}
                   />
                 ) : (
                   <Preview code={previewCode} device={device} />
@@ -310,7 +323,7 @@ function App() {
             </div>
 
             {/* Right: Property Panel */}
-            {showBlocks && selectedBlock && !isFullscreen && (
+            {showBlocks && selectedBlock && !isFullscreen && !isEditing && (
               <div className="lg:col-span-3">
                 <PropertyPanel
                   selectedBlock={selectedBlock}

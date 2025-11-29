@@ -24,7 +24,7 @@ const RefinePromptModal = ({ isOpen, onClose, currentPrompt, onRefine }) => {
       <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] flex flex-col">
         <div className="p-6 border-b">
           <h2 className="text-xl font-semibold text-gray-900">
-            Refine Prompt
+            Chỉnh sửa Prompt
           </h2>
           <p className="text-sm text-gray-600 mt-1">
             Chỉnh sửa prompt để tạo landing page tốt hơn
@@ -49,14 +49,14 @@ const RefinePromptModal = ({ isOpen, onClose, currentPrompt, onRefine }) => {
               onClick={onClose}
               className="px-4 py-2 text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors duration-200"
             >
-              Cancel
+              Hủy
             </button>
             <button
               type="submit"
               disabled={!refinedPrompt.trim()}
               className="px-4 py-2 bg-primary-600 hover:bg-primary-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-white font-medium rounded-lg transition-colors duration-200"
             >
-              Generate with New Prompt
+              Tạo với Prompt mới
             </button>
           </div>
         </form>

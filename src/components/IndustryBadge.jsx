@@ -7,7 +7,7 @@ const IndustryBadge = ({ industry, confidence, onOverride }) => {
 
   const getIndustryName = () => {
     const industryData = allIndustries.find(i => i.key === industry)
-    return industryData?.name || 'General'
+    return industryData?.name || 'Tổng quát'
   }
 
   const getConfidenceColor = () => {
@@ -21,7 +21,7 @@ const IndustryBadge = ({ industry, confidence, onOverride }) => {
       <button
         onClick={() => setShowSelector(!showSelector)}
         className={`px-3 py-1 text-xs font-medium rounded-full flex items-center gap-2 transition-colors ${getConfidenceColor()}`}
-        title={`Industry: ${getIndustryName()} (${Math.round(confidence * 100)}% confidence)`}
+        title={`Ngành: ${getIndustryName()} (${Math.round(confidence * 100)}% độ tin cậy)`}
       >
         <span>{getIndustryName()}</span>
         {confidence > 0 && (
@@ -42,7 +42,7 @@ const IndustryBadge = ({ industry, confidence, onOverride }) => {
           />
           <div className="absolute z-20 mt-2 bg-white rounded-lg shadow-lg border p-2 min-w-[200px] max-h-[300px] overflow-y-auto">
             <div className="text-xs font-medium text-gray-700 mb-2 px-2">
-              Select Industry
+              Chọn ngành
             </div>
             {allIndustries.map(ind => (
               <button

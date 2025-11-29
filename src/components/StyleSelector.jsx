@@ -27,7 +27,7 @@ const StyleSelector = ({ currentStyle, onStyleChange }) => {
           />
           <div className="absolute z-20 mt-2 bg-white rounded-lg shadow-lg border p-2 min-w-[250px] max-h-[400px] overflow-y-auto">
             <div className="text-xs font-medium text-gray-700 mb-2 px-2">
-              Select Style
+              Chọn phong cách
             </div>
             {allStyles.map(style => (
               <button

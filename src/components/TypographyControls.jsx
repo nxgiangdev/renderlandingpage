@@ -28,7 +28,7 @@ const TypographyControls = ({ styles, onChange }) => {
     <div className="space-y-4">
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-2">
-          Font Family
+          Font chữ
         </label>
         <select
           value={styles.fontFamily || 'sans'}
@@ -43,7 +43,7 @@ const TypographyControls = ({ styles, onChange }) => {
 
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-2">
-          Font Size
+          Cỡ chữ
         </label>
         <select
           value={styles.fontSize || 'text-base'}
@@ -58,7 +58,7 @@ const TypographyControls = ({ styles, onChange }) => {
 
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-2">
-          Font Weight
+          Độ đậm
         </label>
         <select
           value={styles.fontWeight || 'font-normal'}
@@ -73,7 +73,7 @@ const TypographyControls = ({ styles, onChange }) => {
 
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-2">
-          Line Height
+          Chiều cao dòng
         </label>
         <input
           type="range"

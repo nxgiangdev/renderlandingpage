@@ -3,13 +3,20 @@ import InlineEditor from './InlineEditor'
 import ImageEditor from './ImageEditor'
 import { useInlineEdit } from '../hooks/useInlineEdit'
 
-const EditablePreview = ({ code, selectedBlockId, onUpdateBlock, blocks, onSelectBlock, device = 'mobile' }) => {
+const EditablePreview = ({ code, selectedBlockId, onUpdateBlock, blocks, onSelectBlock, device = 'mobile', onEditingChange }) => {
   const iframeRef = useRef(null)
   const [editableElements, setEditableElements] = useState([])
   const [forceReload, setForceReload] = useState(0)
   const [editingImage, setEditingImage] = useState(null)
   const [editingImageBlockId, setEditingImageBlockId] = useState(null)
   const { editingElement, editingBlockId, isEditing, startEditing, stopEditing } = useInlineEdit()
+
+  // Notify parent when editing state changes
+  useEffect(() => {
+    if (onEditingChange) {
+      onEditingChange(isEditing || !!editingImage)
+    }
+  }, [isEditing, editingImage, onEditingChange])
 
   useEffect(() => {
     if (iframeRef.current && code) {
@@ -40,7 +47,7 @@ const EditablePreview = ({ code, selectedBlockId, onUpdateBlock, blocks, onSelec
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Preview</title>
+  <title>Xem trước</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
@@ -394,46 +401,68 @@ ${htmlCode}
 
   return (
     <>
-      <div className="border rounded-lg overflow-hidden bg-white relative">
+      <div className="border rounded-lg overflow-hidden bg-white relative w-full">
         {isEditing && (
           <div className="absolute inset-0 bg-black bg-opacity-20 z-10" />
         )}
-        <iframe
-          ref={iframeRef}
-          title="Editable Preview"
-          className="w-full border-0"
-          sandbox="allow-same-origin allow-scripts"
-          style={{ 
-            minHeight: '600px',
-            height: 'calc(100vh - 300px)',
-            maxHeight: '90vh',
-            pointerEvents: isEditing || editingImage ? 'none' : 'auto',
-            width: device === 'mobile' ? '375px' : device === 'tablet' ? '768px' : '100%',
-            margin: device !== 'desktop' ? '0 auto' : '0',
-            display: 'block',
-            border: device !== 'desktop' ? '8px solid #1f2937' : 'none',
-            borderRadius: device !== 'desktop' ? '12px' : '0',
-          }}
-        />
+        <div className="w-full overflow-x-auto flex justify-center">
+          <iframe
+            ref={iframeRef}
+            title="Xem trước có thể chỉnh sửa"
+            className="border-0"
+            sandbox="allow-same-origin allow-scripts"
+            style={{ 
+              minHeight: '600px',
+              height: 'calc(100vh - 300px)',
+              maxHeight: '90vh',
+              pointerEvents: isEditing || editingImage ? 'none' : 'auto',
+              width: device === 'mobile' ? '375px' : device === 'tablet' ? '768px' : '100%',
+              maxWidth: '100%',
+              margin: device !== 'desktop' ? '0 auto' : '0',
+              display: 'block',
+              border: device !== 'desktop' ? '8px solid #1f2937' : 'none',
+              borderRadius: device !== 'desktop' ? '12px' : '0',
+            }}
+          />
+        </div>
       </div>
 
       {isEditing && (
-        <InlineEditor
-          element={editingElement}
-          onSave={handleSaveEdit}
-          onCancel={stopEditing}
-        />
+        <div className="mt-4 bg-white rounded-lg shadow-sm border p-4">
+          <div className="mb-3">
+            <h3 className="text-sm font-medium text-gray-700 mb-1">💡 Đang chỉnh sửa văn bản</h3>
+            <p className="text-xs text-gray-500">Nhấn Enter để lưu, Esc để hủy</p>
+          </div>
+          <InlineEditor
+            element={editingElement}
+            onSave={(text) => {
+              handleSaveEdit(text)
+              stopEditing()
+            }}
+            onCancel={stopEditing}
+          />
+        </div>
       )}
 
       {editingImage && (
-        <ImageEditor
-          element={editingImage}
-          onSave={handleSaveImage}
-          onCancel={() => {
-            setEditingImage(null)
-            setEditingImageBlockId(null)
-          }}
-        />
+        <div className="mt-4 bg-white rounded-lg shadow-sm border p-4">
+          <div className="mb-3">
+            <h3 className="text-sm font-medium text-gray-700 mb-1">💡 Đang chỉnh sửa ảnh</h3>
+            <p className="text-xs text-gray-500">Chọn file hoặc nhập URL mới</p>
+          </div>
+          <ImageEditor
+            element={editingImage}
+            onSave={(url) => {
+              handleSaveImage(url)
+              setEditingImage(null)
+              setEditingImageBlockId(null)
+            }}
+            onCancel={() => {
+              setEditingImage(null)
+              setEditingImageBlockId(null)
+            }}
+          />
+        </div>
       )}
     </>
   )

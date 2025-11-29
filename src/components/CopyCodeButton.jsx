@@ -33,11 +33,11 @@ const CopyCodeButton = ({ code, type = 'full' }) => {
     const success = await copyToClipboard(textToCopy)
 
     if (success) {
-      setToastMessage(`Copied ${copyType === 'full' ? 'HTML' : copyType.toUpperCase()} to clipboard!`)
+      setToastMessage(`Đã sao chép ${copyType === 'full' ? 'HTML' : copyType.toUpperCase()} vào clipboard!`)
       setToastType('success')
       setShowToast(true)
     } else {
-      setToastMessage('Failed to copy to clipboard')
+      setToastMessage('Không thể sao chép vào clipboard')
       setToastType('error')
       setShowToast(true)
     }
@@ -75,13 +75,14 @@ const CopyCodeButton = ({ code, type = 'full' }) => {
       <div className="relative group">
         <button
           onClick={() => handleCopy('full')}
-          className="px-3 py-2 text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors flex items-center gap-2"
+          className="px-2 sm:px-3 py-1 sm:py-2 text-xs sm:text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors flex items-center gap-1 sm:gap-2"
+          title="Sao chép mã"
         >
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
           </svg>
-          Copy Code
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <span className="hidden sm:inline">Sao chép mã</span>
+          <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
           </svg>
         </button>
@@ -92,25 +93,25 @@ const CopyCodeButton = ({ code, type = 'full' }) => {
             onClick={() => handleCopy('full')}
             className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
           >
-            Copy Full HTML
+            Sao chép toàn bộ HTML
           </button>
           <button
             onClick={() => handleCopy('html')}
             className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
           >
-            Copy HTML Only
+            Chỉ sao chép HTML
           </button>
           <button
             onClick={() => handleCopy('css')}
             className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
           >
-            Copy CSS Only
+            Chỉ sao chép CSS
           </button>
           <button
             onClick={() => handleCopy('js')}
             className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
           >
-            Copy JavaScript Only
+            Chỉ sao chép JavaScript
           </button>
         </div>
       </div>

@@ -36,7 +36,7 @@ const ColorPalettePicker = ({ currentPalette, onPaletteChange }) => {
           />
           <div className="absolute z-20 mt-2 bg-white rounded-lg shadow-lg border p-4 min-w-[300px] max-h-[500px] overflow-y-auto">
             <div className="text-sm font-medium text-gray-700 mb-3">
-              Select Color Palette
+              Chọn bảng màu
             </div>
             <div className="grid grid-cols-1 gap-2">
               {allPalettes.map(palette => (

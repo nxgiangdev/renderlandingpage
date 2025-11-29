@@ -37,7 +37,7 @@ const Preview = ({ code, device = 'mobile' }) => {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Preview</title>
+  <title>Xem trước</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
@@ -87,23 +87,26 @@ ${htmlCode}
   }
 
   return (
-    <div className="border rounded-lg overflow-hidden bg-white">
-      <iframe
-        ref={iframeRef}
-        title="Preview"
-        className="w-full border-0"
-        sandbox="allow-same-origin allow-scripts"
-        style={{ 
-          minHeight: '600px',
-          height: 'calc(100vh - 300px)',
-          maxHeight: '90vh',
-          width: device === 'mobile' ? '375px' : device === 'tablet' ? '768px' : '100%',
-          margin: device !== 'desktop' ? '0 auto' : '0',
-          display: 'block',
-          border: device !== 'desktop' ? '8px solid #1f2937' : 'none',
-          borderRadius: device !== 'desktop' ? '12px' : '0',
-        }}
-      />
+    <div className="border rounded-lg overflow-hidden bg-white w-full">
+      <div className="w-full overflow-x-auto flex justify-center">
+        <iframe
+          ref={iframeRef}
+          title="Xem trước"
+          className="border-0"
+          sandbox="allow-same-origin allow-scripts"
+          style={{ 
+            minHeight: '600px',
+            height: 'calc(100vh - 300px)',
+            maxHeight: '90vh',
+            width: device === 'mobile' ? '375px' : device === 'tablet' ? '768px' : '100%',
+            maxWidth: '100%',
+            margin: device !== 'desktop' ? '0 auto' : '0',
+            display: 'block',
+            border: device !== 'desktop' ? '8px solid #1f2937' : 'none',
+            borderRadius: device !== 'desktop' ? '12px' : '0',
+          }}
+        />
+      </div>
     </div>
   )
 }
